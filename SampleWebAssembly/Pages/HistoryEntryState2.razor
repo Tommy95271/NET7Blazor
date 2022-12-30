@@ -1,0 +1,15 @@
+﻿@page "/history-entry-state-2"
+@inject NavigationManager Navigation
+
+<PageTitle>History entry state 2</PageTitle>
+
+
+Welcome to History entry state 2!
+
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        Console.WriteLine(Navigation.HistoryEntryState);
+    }
+}

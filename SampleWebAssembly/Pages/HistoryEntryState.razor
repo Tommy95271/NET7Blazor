@@ -1,0 +1,18 @@
+﻿@page "/history-entry-state"
+@inject NavigationManager Navigation
+
+<p>
+    <button @onclick="@AddHistoryState">
+        Add History entry state
+    </button>
+</p>
+
+@code {
+    private void AddHistoryState()
+    {
+        Navigation.NavigateTo("history-entry-state-2", new NavigationOptions
+            {
+                HistoryEntryState = "Navigation state"
+            });
+    }
+}
