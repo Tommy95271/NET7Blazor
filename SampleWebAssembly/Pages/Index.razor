@@ -9,8 +9,12 @@
 <p>Plain input old way:</p>
 <input value="@searchText" @onchange="PerformSearch2" />
 
+<p>bind:get & bind:set</p>
+<input @bind:get="searchText2" @bind:set="SetAsync" />
+
 @code {
     string searchText;
+    string searchText2;
 
     async Task PerformSearch()
     {
@@ -20,5 +24,11 @@
     async Task PerformSearch2(ChangeEventArgs args)
     {
         Console.WriteLine(args.Value);
+    }
+
+    async Task SetAsync(string value)
+    {
+        searchText2 = value;
+        Console.WriteLine(value);
     }
 }
