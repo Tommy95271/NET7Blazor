@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmptyBlazorServer", "EmptyB
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorWebAssembly", "BlazorWebAssembly\BlazorWebAssembly.csproj", "{C90B656D-7A7F-42B1-A101-A421B040C980}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleBlazorWebAssembly", "SampleWebAssembly\SampleBlazorWebAssembly.csproj", "{6587E0EE-BDEF-4245-AD05-690D90148CF0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleBlazorWebAssembly", "SampleWebAssembly\SampleBlazorWebAssembly.csproj", "{6587E0EE-BDEF-4245-AD05-690D90148CF0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
