@@ -1,10 +1,13 @@
 ﻿@page "/"
-<p>Plain input:</p>
 
+<p>Plain input:</p>
 <input @bind="searchText" @bind:after="PerformSearch" />
 
 <p>InputText control:</p>
 <InputText @bind-Value="searchText" @bind-Value:after="PerformSearch" />
+
+<p>Plain input old way:</p>
+<input value="@searchText" @onchange="PerformSearch2" />
 
 @code {
     string searchText;
@@ -12,5 +15,10 @@
     async Task PerformSearch()
     {
         Console.WriteLine(searchText);
+    }
+
+    async Task PerformSearch2(ChangeEventArgs args)
+    {
+        Console.WriteLine(args.Value);
     }
 }
