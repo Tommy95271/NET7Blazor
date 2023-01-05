@@ -13,7 +13,11 @@
 }
 else
 {
-    <input @bind:event="oninput" @bind="searchText" @bind:after="Search" />
+    <p>@@bind & @@bind:after</p>
+    <input @bind:event="oninput" @bind="searchText" @bind:after="SearchAsync" />
+
+    <p>@@bind:get & @@bind:set</p>
+    <input @bind:event="oninput" @bind:get="searchText" @bind:set="SearchAsync2" />
 
     <table class="table">
         <thead>
@@ -46,11 +50,17 @@ else
     protected override async Task OnInitializedAsync()
     {
         forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("sample-data/weather.json");
-        await Search();
+        await SearchAsync();
     }
 
-    async Task Search()
+    async Task SearchAsync()
     {
+        forecasts2 = forecasts.Where(f => f.Summary.Contains(searchText)).ToArray();
+    }
+
+    async Task SearchAsync2(string value)
+    {
+        searchText = value;
         forecasts2 = forecasts.Where(f => f.Summary.Contains(searchText)).ToArray();
     }
 
