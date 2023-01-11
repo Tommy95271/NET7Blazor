@@ -1,0 +1,20 @@
+﻿@page "/call-javascript-1"
+@using System.Runtime.InteropServices.JavaScript
+
+<h1>
+    JS <code>[JSImport]</code>/<code>[JSExport]</code> Interop
+    (Call JS Example 1)
+</h1>
+
+@(message is not null ? message : string.Empty)
+
+@code {
+    private string? message;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await JSHost.ImportAsync("CallJavaScript1", "../Pages/CallJavaScript1.razor.js");
+
+        message = GetWelcomeMessage();
+    }
+}
