@@ -1,0 +1,23 @@
+﻿@page "/call-js-new-way"
+@using System.Runtime.InteropServices.JavaScript
+
+<h1>
+    Call JS in new way
+</h1>
+
+<p>
+    <span id="result1">.NET method not executed</span>
+</p>
+
+@code {
+
+    protected override async Task OnInitializedAsync()
+    {
+        await JSHost.ImportAsync("CallJSNewWay", "../Pages/CallJSNewWay.razor.js");
+
+        for (int i = 0; i < 10; i++)
+        {
+            ShowWelcomeMessage();
+        }
+    }
+}
