@@ -1,0 +1,19 @@
+﻿@page "/call-dotnet-1"
+@using System.Runtime.InteropServices.JavaScript
+
+<h1>
+    JS <code>[JSImport]</code>/<code>[JSExport]</code> Interop
+    (Call .NET Example 1)
+</h1>
+
+<p>
+    <span id="result">.NET method not executed yet</span>
+</p>
+
+@code {
+    protected override async Task OnInitializedAsync()
+    {
+        await JSHost.ImportAsync("CallNetFromJS", "../Pages/CallNetFromJS.razor.js");
+        SetWelcomeMessage();
+    }
+}
