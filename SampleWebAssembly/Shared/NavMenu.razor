@@ -9,71 +9,14 @@
 
 <div class="@NavMenuCssClass nav-scrollable" @onclick="ToggleNavMenu">
     <nav class="flex-column">
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Home
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="oi oi-plus" aria-hidden="true"></span> Counter
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="fetchdata">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="nav-handler">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Nav handler
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="nav-lock">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Nav lock
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="navigate">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Navigate
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="history-entry-state">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> History entry state
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="quick-grid" Match="NavLinkMatch.All">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Quick grid
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="quick-grid-filter">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Quick grid filter
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="call-javascript-1">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Call JavaScript 1
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="call-js-new-way">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Call JS in new way
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="call-js-old-way">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Call JS in old way
-            </NavLink>
-        </div>
-        <div class="nav-item px-3">
-            <NavLink class="nav-link" href="call-dotnet-1">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Call .NET from JS
-            </NavLink>
-        </div>
+        @foreach (var item in MenuDic)
+        {
+            <div class="nav-item px-3">
+                <NavLink class="nav-link" href="@item.Key" Match="NavLinkMatch.All">
+                    <span class="oi oi-home" aria-hidden="true"></span> @item.Value
+                </NavLink>
+            </div>
+        }
     </nav>
 </div>
 
@@ -81,6 +24,27 @@
     private bool collapseNavMenu = true;
 
     private string? NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+
+    private Dictionary<string, string> MenuDic { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        MenuDic = new Dictionary<string, string> {
+            { "", "Home" },
+            { "counter", "Counter" },
+            { "fetchdata", "Fetch data" },
+            { "nav-handler", "Nav handler" },
+            { "nav-lock", "Nav lock" },
+            { "navigate", "Navigate" },
+            { "history-entry-state", "History entry state" },
+            { "quick-grid", "Quick grid" },
+            { "quick-grid-filter", "Quick grid filter" },
+            { "call-javascript-1", "Call JS 1" },
+            { "call-js-new-way", "Call JS in new way" },
+            { "call-js-old-way", "Call JS in old way" },
+            { "call-dotnet-1", "Call .NET from jS" },
+        };
+    }
 
     private void ToggleNavMenu()
     {
