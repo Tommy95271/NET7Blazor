@@ -32,8 +32,12 @@
 @code {
     string nameFilter;
     PaginationState pagination = new PaginationState { ItemsPerPage = 10 };
+    IQueryable<Person> people;
 
-    IQueryable<Person> people = PersonHelper.GetPeople().AsQueryable();
+    protected override async Task OnInitializedAsync()
+    {
+        people = PersonHelper.GetPeople().AsQueryable();
+    }
 
     IQueryable<Person> filteredPeople
     {
