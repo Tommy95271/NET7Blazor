@@ -3,18 +3,24 @@
 @inject HttpClient Http
 @inject NavigationManager NavManager
 
-<div class="page-size-chooser">
-    Items per page:
-    <select @bind="@pagination.ItemsPerPage">
-        <option>5</option>
-        <option>10</option>
-        <option>20</option>
-        <option>50</option>
-    </select>
+<div class="row w-50">
+    <div class="page-size-chooser col-md-6">
+        Items per page:
+        <select @bind="@pagination.ItemsPerPage">
+            <option>5</option>
+            <option>10</option>
+            <option>20</option>
+            <option>50</option>
+        </select>
+    </div>
+
+    <div class="col-md-6">
+        <button class="my-button" @onclick="Submit">Click me!</button>
+    </div>
 </div>
 
 <div class="d-grid w-50" tabindex="-1">
-    <QuickGrid ItemsProvider="@foodRecallProvider" Virtualize="true" Pagination="@pagination">
+    <QuickGrid ItemsProvider="@foodRecallProvider" Virtualize="true" Pagination="@pagination" @ref="myGrid">
         <PropertyColumn Title="ID" Property="@(c => c.Event_Id)" />
         <PropertyColumn Property="@(c => c.State)" />
         <PropertyColumn Property="@(c => c.City)" />
@@ -30,6 +36,7 @@
     GridItemsProvider<FoodRecall>? foodRecallProvider;
     PaginationState pagination = new PaginationState { ItemsPerPage = 10 };
     int numResults;
+    QuickGrid<FoodRecall> myGrid;
 
     protected override async Task OnInitializedAsync()
     {
@@ -40,10 +47,10 @@
         foodRecallProvider = async req =>
         {
             var url = NavManager.GetUriWithQueryParameters("https://api.fda.gov/food/enforcement.json", new Dictionary<string, object?>
-            {
+                {
                 { "skip", req.StartIndex },
                 { "limit", req.Count },
-            });
+                });
 
             var response = await Http.GetFromJsonAsync<FoodRecallQueryResult>(url, req.CancellationToken);
             return GridItemsProviderResult.From(
@@ -53,5 +60,11 @@
 
         // Display the number of results just for information. This is completely separate from the grid.
         numResults = (await Http.GetFromJsonAsync<FoodRecallQueryResult>("https://api.fda.gov/food/enforcement.json"))!.Meta.Results.Total;
+    }
+
+    async Task Submit()
+    {
+        // We can force the grid to reload the current data
+        await myGrid.RefreshDataAsync();
     }
 }
