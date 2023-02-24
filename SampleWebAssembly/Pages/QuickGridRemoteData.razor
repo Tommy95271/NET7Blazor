@@ -14,7 +14,7 @@
         </select>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-6 text-end">
         <button class="my-button" @onclick="Submit">Click me!</button>
     </div>
 </div>
@@ -25,7 +25,11 @@
         <PropertyColumn Property="@(c => c.State)" />
         <PropertyColumn Property="@(c => c.City)" />
         <PropertyColumn Title="Company" Property="@(c => c.Recalling_Firm)" />
-        <PropertyColumn Property="@(c => c.Status)" />
+        <TemplateColumn Title="Status">
+            <div class="flex items-center bg-info p-3 rounded-1">
+                <strong>@context.Status</strong>
+            </div>
+        </TemplateColumn>
     </QuickGrid>
     <Paginator Value="@pagination" />
 </div>
