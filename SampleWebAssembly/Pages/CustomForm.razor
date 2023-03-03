@@ -1,0 +1,27 @@
+﻿@page "/custom-form"
+
+<h3>Custom Form</h3>
+
+<EditForm Model="@this" autocomplete="off">
+    <DataAnnotationsValidator />
+
+    <p>
+        請輸入 email 地址:
+        <input @bind="EmailAddress" />
+    </p>
+
+    <button type="submit">Submit</button>
+
+    <ul>
+        @foreach (var message in context.GetValidationMessages())
+        {
+            <li class="validation-message">@message</li>
+        }
+    </ul>
+
+</EditForm>
+
+@code {
+    [CustomEmailAddress]
+    public string? EmailAddress { get; set; }
+}
